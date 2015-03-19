@@ -110,10 +110,12 @@ public class ChatSocket extends WebSocket<String> {
     }
 
     private void handleDisconnect() {
+        System.out.println("Disconnected");
         if(chattingWith != null) {
             sendMessage(new ChatControlMessage(ChatControlMessage.CCT_CHAT_DISCONNECT));
             chattingWith.clear();
         }
+        chatManager.removeOffer(this);
         clear();
     }
 
