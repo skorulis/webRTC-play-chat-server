@@ -14,7 +14,10 @@ public class Application extends Controller {
 
     public static WebSocket<String> echo() {
         return new EchoSocket();
+    }
 
+    public static WebSocket<String> chat() {
+        return new ChatSocket();
     }
 
 }

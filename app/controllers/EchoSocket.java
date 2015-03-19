@@ -9,6 +9,7 @@ import play.mvc.WebSocket;
 public class EchoSocket extends WebSocket<String> {
 
     public void onReady(final WebSocket.In<String> in, final WebSocket.Out<String> out) {
+        System.out.println("START ECHO SOCKET " + in.toString());
         in.onMessage(new F.Callback<String>() {
             @Override
             public void invoke(String s) throws Throwable {
