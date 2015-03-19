@@ -8,6 +8,8 @@ import views.html.*;
 
 public class Application extends Controller {
 
+    private static final ChatSocketManager chatManager = new ChatSocketManager();
+
     public static Result index() {
         return ok(index.render("Your new application is ready."));
     }
@@ -17,7 +19,7 @@ public class Application extends Controller {
     }
 
     public static WebSocket<String> chat() {
-        return new ChatSocket();
+        return new ChatSocket(chatManager);
     }
 
 }
