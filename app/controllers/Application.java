@@ -10,10 +10,6 @@ public class Application extends Controller {
 
     private static final ChatSocketManager chatManager = new ChatSocketManager();
 
-    public static Result index() {
-        return ok(index.render("Your new application is ready."));
-    }
-
     public static WebSocket<String> echo() {
         return new EchoSocket();
     }

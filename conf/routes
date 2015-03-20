@@ -3,7 +3,8 @@
 # ~~~~
 
 # Home page
-GET        /                    controllers.Application.index()
+
+GET        /                    controllers.Assets.at(path="/public/html", file="index.html")
 GET        /echo                controllers.Application.echo()
 GET        /chat                controllers.Application.chat()
 
