@@ -76,6 +76,7 @@ public class ChatSocket extends WebSocket<String> {
             System.out.println("Found available connection");
             message.type = ChatControlMessage.CCT_CHAT_OFFER;
             message.payload = chatManager.gson.toJson(other.sdp);
+            sendMessage(message);
             other.chattingWith = this;
             chattingWith = other;
             for(ICECandidateModel ice : other.waitingCandidates) {
@@ -86,8 +87,9 @@ public class ChatSocket extends WebSocket<String> {
             }
         } else {
             message.type = ChatControlMessage.CCT_CHAT_INIT;
+            sendMessage(message);
         }
-        sendMessage(message);
+
     }
 
     private void handleChatOffer(SDPModel offer) {
