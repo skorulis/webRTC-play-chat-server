@@ -2,3 +2,5 @@ Experiment writing a webRTC chat server
 =================================
 
 This server opens a websocket and negotiates webRTC connections between 2 clients for text based chat.
+
+An iOS client can be found at https://github.com/skorulis/webRTC-chat-iOS
