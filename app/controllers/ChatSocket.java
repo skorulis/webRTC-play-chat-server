@@ -21,6 +21,7 @@ public class ChatSocket extends WebSocket<String> {
 
     private WebSocket.In<String> in;
     private WebSocket.Out<String> out;
+    private boolean hasDisconnected;
 
     public ChatSocket(ChatSocketManager manager) {
         this.chatManager = manager;
@@ -54,12 +55,16 @@ public class ChatSocket extends WebSocket<String> {
         in.onClose(new F.Callback0() {
             @Override
             public void invoke() throws Throwable {
+                hasDisconnected = true;
                 handleDisconnect();
             }
         });
     }
 
     private void sendMessage(ChatControlMessage message) {
+        if(hasDisconnected) {
+            return;
+        }
         String json = chatManager.gson.toJson(message);
         out.write(json);
     }
@@ -112,7 +117,7 @@ public class ChatSocket extends WebSocket<String> {
     private void handleDisconnect() {
         System.out.println("Disconnected");
         if(chattingWith != null) {
-            sendMessage(new ChatControlMessage(ChatControlMessage.CCT_CHAT_DISCONNECT));
+            chattingWith.sendMessage(new ChatControlMessage(ChatControlMessage.CCT_CHAT_DISCONNECT));
             chattingWith.clear();
         }
         chatManager.removeOffer(this);
