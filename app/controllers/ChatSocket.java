@@ -71,6 +71,7 @@ public class ChatSocket extends WebSocket<String> {
 
     private void handleChatRequest() {
         ChatSocket other = chatManager.findOffer();
+        System.out.println("Got chat request, offer: " + other);
         ChatControlMessage message = new ChatControlMessage();
         if(other != null) {
             System.out.println("Found available connection");
